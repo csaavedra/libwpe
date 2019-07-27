@@ -30,8 +30,10 @@ include(GNUInstallDirs)
 
 find_package(EGL REQUIRED)
 find_package(Libxkbcommon REQUIRED)
+find_package(Vulkan REQUIRED)
 
 add_definitions(${EGL_DEFINITIONS})
+add_definitions(${VULKAN_DEFINITIONS})
 add_definitions(-DWPE_COMPILATION)
 
 if(WPE_BACKEND)
@@ -44,6 +46,7 @@ set(WPE_INCLUDE_DIRECTORIES
     ${DERIVED_SOURCES_DIR}
     ${EGL_INCLUDE_DIRS}
     ${LIBXKBCOMMON_INCLUDE_DIRS}
+    ${VULKAN_INCLUDE_DIRS}
 )
 
 set(WPE_LIBRARIES
@@ -59,6 +62,7 @@ set(WPE_SOURCES
     src/pasteboard-generic.cpp
     src/pasteboard-noop.cpp
     src/renderer-backend-egl.c
+    src/renderer-backend-vulkan.c
     src/renderer-host.c
     src/version.c
     src/view-backend.c
@@ -73,9 +77,11 @@ set(WPE_PUBLIC_HEADERS
   include/wpe/loader.h
   include/wpe/pasteboard.h
   include/wpe/renderer-backend-egl.h
+  include/wpe/renderer-backend-vulkan.h
   include/wpe/renderer-host.h
   include/wpe/view-backend.h
   include/wpe/wpe-egl.h
+  include/wpe/wpe-vulkan.h
   include/wpe/wpe.h
 )
 
